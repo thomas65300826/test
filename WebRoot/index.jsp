@@ -22,5 +22,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     This is my JSP page. <br>
+    <form name = "form" action = "writeExcel" method="POST" >
+     <input type="submit" name="提交" name="Button 1">
+    </form>
   </body>
 </html>
