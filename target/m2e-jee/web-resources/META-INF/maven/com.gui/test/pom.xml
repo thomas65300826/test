@@ -34,21 +34,21 @@
     <artifactId>servlet-api1</artifactId>
     <version>1.0</version>
     <scope>system</scope>
-    <systemPath>/Applications/MyEclipse/externalJar/mail.jar_activation.jar/activation.jar</systemPath>
+    <systemPath>${project.basedir}/lib/activation.jar</systemPath>
 	</dependency>
 	    <dependency>
     <groupId>javax.servlet2</groupId>
     <artifactId>servlet-api2</artifactId>
     <version>1.0</version>
     <scope>system</scope>
-    <systemPath>/Applications/MyEclipse/externalJar/mail.jar_activation.jar/mail.jar</systemPath>
+    <systemPath>${project.basedir}/lib/mail.jar</systemPath>
 	</dependency>
 	    <dependency>
     <groupId>javax.servlet3</groupId>
     <artifactId>servlet-api3</artifactId>
     <version>1.0</version>
     <scope>system</scope>
-    <systemPath>/Applications/MyEclipse/externalJar/jxl.jar</systemPath>
+    <systemPath>${project.basedir}/lib/jxl.jar</systemPath>
 	</dependency>
     
   </dependencies>
