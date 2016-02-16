@@ -38,13 +38,14 @@ public class writeExcel extends HttpServlet {
         Date d = new Date(); 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_kkmmss "); 
         String random = sdf.format(d); 
+        String path = System.getProperty("user.dir");
         String targetFile = "Gui Chen"+random + ".xls"; 
 		 try { 
 
 	            //response.setContentType("application/vnd.ms-excel"); 
 	            response.addHeader("Content-Disposition", "attachment;   filename=\"" + targetFile + "\""); 
-	  
-	            FileOutputStream customerForm = new FileOutputStream("/Users/user/Workspaces/MyEclipse 10/"+targetFile);
+	            
+	            FileOutputStream customerForm = new FileOutputStream(path+"/"+targetFile);
 	            WritableWorkbook wwb = Workbook.createWorkbook(customerForm); 
 	            // 新建一张表 
 	            WritableSheet wsheet = wwb.createSheet("Sheet1", 0); 
@@ -386,7 +387,7 @@ public class writeExcel extends HttpServlet {
          
          // 第二部分是附件
          messageBodyPart = new MimeBodyPart();
-         String filename = "/Users/user/Workspaces/MyEclipse 10/"+targetFile;
+         String filename = path+"/"+targetFile;
          DataSource source = new FileDataSource(filename);
          messageBodyPart.setDataHandler(new DataHandler(source));
          messageBodyPart.setFileName(targetFile);
