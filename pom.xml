@@ -55,6 +55,9 @@
           <exclude>**/*.java</exclude>
         </excludes>
       </resource>
+      <resource>
+        <directory>${basedir}/images</directory>
+      </resource>
     </resources>
     <plugins>
     

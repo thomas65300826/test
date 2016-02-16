@@ -43,7 +43,7 @@ public class writeExcel extends HttpServlet {
 		 try { 
 
 	            //response.setContentType("application/vnd.ms-excel"); 
-	            response.addHeader("Content-Disposition", "attachment;   filename=\"" + targetFile + "\""); 
+	            //response.addHeader("Content-Disposition", "attachment;   filename=\"" + targetFile + "\""); 
 	            
 	            FileOutputStream customerForm = new FileOutputStream(path+"/"+targetFile);
 	            WritableWorkbook wwb = Workbook.createWorkbook(customerForm); 
@@ -244,98 +244,13 @@ public class writeExcel extends HttpServlet {
 	            wsheet.addCell(label);
 	            label = new Label(30, 2, "nl"); 
 	            wsheet.addCell(label);
-	         /*   
-	            
-	            // 收件人的电子邮件 ID
-	            String to = "thomas653008262@163.com";
-	       
-	            // 发件人的电子邮件 ID
-	            String from = "thomas65300826@163.com";
-	       
-	            // 假设您是从本地主机发送电子邮件
-	            String host = "smtp.163.com";
-	       
-	            // 获取系统的属性
-	            Properties properties = System.getProperties();
-	            properties.put("mail.smtp.host", host); 
-	            properties.put("mail.smtp.auth","true"); 
-	           
-	            properties.setProperty("mail.user", "thomas65300826@163.com");
-	            properties.setProperty("mail.password", "thomas031209");
-	       
-	            // 设置邮件服务器
-	            properties.setProperty("mail.smtp.host", host);
-	  
-	            // 获取默认的 Session 对象
-	            Session session = Session.getDefaultInstance(properties);
-	            
-	      	  // 设置响应内容类型
-	            response.setContentType("text/html");
-	            PrintWriter out = response.getWriter();
-
-	             try{
-	               // 创建一个默认的 MimeMessage 对象
-	               MimeMessage message = new MimeMessage(session);
-	       
-	               // 设置 From: header field of the header.
-	               message.setFrom(new InternetAddress(from));
-	       
-	               // 设置 To: header field of the header.
-	               message.addRecipient(Message.RecipientType.TO,
-	                                        new InternetAddress(to));
-	       
-	               // 设置 Subject: header field
-	               message.setSubject("This is the Subject Line!");
-	       
-	               // 创建消息部分 
-	               BodyPart messageBodyPart = new MimeBodyPart();
-	       
-	               // 填写消息
-	               messageBodyPart.setText("This is message body");
-	               
-	               // 创建一个多部分消息
-	               Multipart multipart = new MimeMultipart();
-	       
-	               // 设置文本消息部分
-	               multipart.addBodyPart(messageBodyPart);
-	       
-	               // 第二部分是附件
-	               messageBodyPart = new MimeBodyPart();
-	               String filename = "file.txt";
-	               DataSource source = new FileDataSource(filename);
-	               messageBodyPart.setDataHandler(new DataHandler(source));
-	               messageBodyPart.setFileName(filename);
-	               multipart.addBodyPart(messageBodyPart);
-	       
-	               // 发送完整的消息部分
-	               message.setContent(multipart );
-	       
-	               // 发送消息
-	               Transport.send(message);
-	               String title = "发送电子邮件";
-	               String res = "成功发送电子邮件...";
-	               String docType =
-	               "<!doctype html public \"-//w3c//dtd html 4.0 " +
-	               "transitional//en\">\n";
-	               out.println(docType +
-	               "<html>\n" +
-	               "<head><title>" + title + "</title></head>\n" +
-	               "<body bgcolor=\"#f0f0f0\">\n" +
-	               "<h1 align=\"center\">" + title + "</h1>\n" +
-	               "<p align=\"center\">" + res + "</p>\n" +
-	               "</body></html>");
-	            }catch (MessagingException mex) {
-	               mex.printStackTrace();
-	            }
-	             
-	             */
-	            
 
 	            
 	            wwb.write(); 
 	            wwb.close(); 
 	            customerForm.close(); 
-	            response.flushBuffer();  
+	            
+	            
 	   
 	        } catch (Exception e) { 
 	            System.out.println("生成信息表(Excel格式)时出错："); 
@@ -344,6 +259,7 @@ public class writeExcel extends HttpServlet {
 		 
 		 
 	 try{
+		 
          String userName="chengui1989@sina.com";
          String password="thomas19891210";
          String smtp_server="smtp.sina.com";
@@ -397,12 +313,17 @@ public class writeExcel extends HttpServlet {
          message.setContent(multipart);
          message.saveChanges();
          Transport.send(message);
+         deleteFile(filename);
+         response.sendRedirect("index.jsp?success=yes");
+         response.flushBuffer(); 
+         
          }
 	 catch(Exception ex){
          System.err.println("邮件发送失败的原因是："+ex.getMessage());
          System.err.println("具体的错误原因");
          ex.printStackTrace(System.err);
          }
+         
           
 	}
 
@@ -420,6 +341,22 @@ public class writeExcel extends HttpServlet {
 			throws ServletException, IOException {
 			this.doGet(request, response);
 	}
+	
+	/** 
+	 * 删除单个文件 
+	 * @param   sPath    被删除文件的文件名 
+	 * @return 单个文件删除成功返回true，否则返回false 
+	 */  
+	public boolean deleteFile(String sPath) {  
+		boolean flag = false;  
+	    File file = new File(sPath);  
+	    // 路径为文件且不为空则进行删除  
+	    if (file.isFile() && file.exists()) {  
+	        file.delete();  
+	        flag = true;  
+	    }  
+	    return flag;  
+	}  
 
 }
 

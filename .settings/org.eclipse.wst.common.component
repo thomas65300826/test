@@ -3,6 +3,8 @@
     <wb-module deploy-name="test">
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <wb-resource deploy-path="/" source-path="/WebRoot"/>
+        <wb-resource deploy-path="/" source-path="/images"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/images"/>
         <property name="java-output-path" value="/test/WebRoot/WEB-INF/classes"/>
         <property name="context-root" value="/"/>
     </wb-module>
