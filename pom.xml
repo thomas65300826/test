@@ -56,7 +56,7 @@
         </excludes>
       </resource>
       <resource>
-        <directory>${basedir}/images</directory>
+        <directory>${basedir}/WebRoot/images</directory>
       </resource>
     </resources>
     <plugins>
