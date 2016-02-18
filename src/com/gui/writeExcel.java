@@ -40,6 +40,8 @@ public class writeExcel extends HttpServlet {
         String random = sdf.format(d); 
         String path = System.getProperty("user.dir");
         String targetFile = "Gui Chen"+random + ".xls"; 
+        request.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=utf-8");
 		 try { 
 
 	            //response.setContentType("application/vnd.ms-excel"); 
