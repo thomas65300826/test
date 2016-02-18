@@ -115,135 +115,78 @@ public class writeExcel extends HttpServlet {
 	            label = new Label(30, 0, "gporgcountry1"); 
 	            wsheet.addCell(label);
 	   ///////////////////////////////////////////////////////////
+				 int packgeAmount = Integer.parseInt(request.getParameter("packageAmount"));
+				 System.out.print("/n package amount is:"+packgeAmount);
+			     SimpleDateFormat orderDateFormater = new SimpleDateFormat("MM/dd/yy"); 
+			     String orderDateFormated = orderDateFormater.format(d); 
+	             for(int i = 0; i<packgeAmount;i++){
+	            	int packageNumber = i+1;
+	            	label = new Label(0, packageNumber, ""); 
+	 	            wsheet.addCell(label); 
+	 	            label = new Label(1, packageNumber, ""); 
+	 	            wsheet.addCell(label); 
+	 	            label = new Label(2, packageNumber, ""); 
+	 	            wsheet.addCell(label); 
+	 	            label = new Label(3, packageNumber, ""); 
+	 	            wsheet.addCell(label); 
+	 	            label = new Label(4, packageNumber, ""); 
+	 	            wsheet.addCell(label); 
+	 	            label = new Label(5, packageNumber, request.getParameter("packageWeight"+packageNumber)); //packageWeight
+	 	            wsheet.addCell(label); 
+	 	            label = new Label(6, packageNumber, ""); 
+	 	            wsheet.addCell(label); 
+	 	            label = new Label(7, packageNumber, ""); 
+	 	            wsheet.addCell(label); 
+	 	            label = new Label(8, packageNumber, request.getParameter("receiver"+packageNumber)); //ReceiverName
+	 	            wsheet.addCell(label); 
+	 	            label = new Label(9, packageNumber, request.getParameter("receiverPhone"+packageNumber)); //ReceiverPhone
+	 	            wsheet.addCell(label); 
+	 	            label = new Label(10, packageNumber, ""); 
+	 	            wsheet.addCell(label); 
+	 	            label = new Label(11, packageNumber, request.getParameter("receiverAddress"+packageNumber)); //receiveAddress
+	 	            wsheet.addCell(label);
+	 	            label = new Label(12, packageNumber, ""); 
+	 	            wsheet.addCell(label);
+	 	            label = new Label(13, packageNumber, ""); 
+	 	            wsheet.addCell(label);
+	 	            label = new Label(14, packageNumber, request.getParameter("receiverPostcode"+packageNumber)); //receiverPostcode
+	 	            wsheet.addCell(label);
+	 	            label = new Label(15, packageNumber, request.getParameter("receiverCity"+packageNumber)); //receiverCity
+	 	            wsheet.addCell(label);
+	 	            label = new Label(16, packageNumber, "CN"); 
+	 	            wsheet.addCell(label);
+	 	            label = new Label(17, packageNumber, orderDateFormated); //orderDate
+	 	            wsheet.addCell(label);
+	 	            label = new Label(18, packageNumber, ""); 
+	 	            wsheet.addCell(label);
+	 	            label = new Label(19, packageNumber, "0"); 
+	 	            wsheet.addCell(label);
+	 	            label = new Label(20, packageNumber, "Ref001"); 
+	 	            wsheet.addCell(label);
+	 	            label = new Label(21, packageNumber, "1"); 
+	 	            wsheet.addCell(label);
+	 	            label = new Label(22, packageNumber, "1"); 
+	 	            wsheet.addCell(label);
+	 	            label = new Label(23, packageNumber, "1"); 
+	 	            wsheet.addCell(label);
+	 	            label = new Label(24, packageNumber, ""); 
+	 	            wsheet.addCell(label);
+	 	            label = new Label(25, packageNumber, request.getParameter("packageAttribute"+packageNumber)); //packageAttribute
+	 	            wsheet.addCell(label);
+	 	            label = new Label(26, packageNumber, "1"); 
+	 	            wsheet.addCell(label);
+	 	            label = new Label(27, packageNumber, request.getParameter("packageWeight"+packageNumber)); //packageWeight
+	 	            wsheet.addCell(label);
+	 	            label = new Label(28, packageNumber, request.getParameter("packageValue"+packageNumber)); //packageValue
+	 	            wsheet.addCell(label);
+	 	            label = new Label(29, packageNumber, "1901"); 
+	 	            wsheet.addCell(label);
+	 	            label = new Label(30, packageNumber, "nl"); 
+	 	            wsheet.addCell(label);
+	             }
 	            
-	            
-	            label = new Label(0, 1, ""); 
-	            wsheet.addCell(label); 
-	            label = new Label(1, 1, ""); 
-	            wsheet.addCell(label); 
-	            label = new Label(2, 1, ""); 
-	            wsheet.addCell(label); 
-	            label = new Label(3, 1, ""); 
-	            wsheet.addCell(label); 
-	            label = new Label(4, 1, ""); 
-	            wsheet.addCell(label); 
-	            label = new Label(5, 1, "7"); 
-	            wsheet.addCell(label); 
-	            label = new Label(6, 1, ""); 
-	            wsheet.addCell(label); 
-	            label = new Label(7, 1, ""); 
-	            wsheet.addCell(label); 
-	            label = new Label(8, 1, "吴少岚"); 
-	            wsheet.addCell(label); 
-	            label = new Label(9, 1, "15999518990"); 
-	            wsheet.addCell(label); 
-	            label = new Label(10, 1, ""); 
-	            wsheet.addCell(label); 
-	            label = new Label(11, 1, "深圳市罗湖区人民南路发展中心908"); 
-	            wsheet.addCell(label);
-	            label = new Label(12, 1, ""); 
-	            wsheet.addCell(label);
-	            label = new Label(13, 1, ""); 
-	            wsheet.addCell(label);
-	            label = new Label(14, 1, "518000"); 
-	            wsheet.addCell(label);
-	            label = new Label(15, 1, "深圳市"); 
-	            wsheet.addCell(label);
-	            label = new Label(16, 1, "CN"); 
-	            wsheet.addCell(label);
-	            label = new Label(17, 1, "16/2/16"); 
-	            wsheet.addCell(label);
-	            label = new Label(18, 1, ""); 
-	            wsheet.addCell(label);
-	            label = new Label(19, 1, "0"); 
-	            wsheet.addCell(label);
-	            label = new Label(20, 1, "Ref001"); 
-	            wsheet.addCell(label);
-	            label = new Label(21, 1, "1"); 
-	            wsheet.addCell(label);
-	            label = new Label(22, 1, "1"); 
-	            wsheet.addCell(label);
-	            label = new Label(23, 1, "1"); 
-	            wsheet.addCell(label);
-	            label = new Label(24, 1, ""); 
-	            wsheet.addCell(label);
-	            label = new Label(25, 1, "baby products"); 
-	            wsheet.addCell(label);
-	            label = new Label(26, 1, "1"); 
-	            wsheet.addCell(label);
-	            label = new Label(27, 1, "7"); 
-	            wsheet.addCell(label);
-	            label = new Label(28, 1, "150"); 
-	            wsheet.addCell(label);
-	            label = new Label(29, 1, "1901"); 
-	            wsheet.addCell(label);
-	            label = new Label(30, 1, "nl"); 
-	            wsheet.addCell(label);
+	           
 	      /////////////////////////////////////////////////////////
-	            
-	            
-	            label = new Label(0, 2, ""); 
-	            wsheet.addCell(label); 
-	            label = new Label(1, 2, ""); 
-	            wsheet.addCell(label); 
-	            label = new Label(2, 2, ""); 
-	            wsheet.addCell(label); 
-	            label = new Label(3, 2, ""); 
-	            wsheet.addCell(label); 
-	            label = new Label(4, 2, ""); 
-	            wsheet.addCell(label); 
-	            label = new Label(5, 2, "7"); 
-	            wsheet.addCell(label); 
-	            label = new Label(6, 2, ""); 
-	            wsheet.addCell(label); 
-	            label = new Label(7, 2, ""); 
-	            wsheet.addCell(label); 
-	            label = new Label(8, 2, "蔡馥霖"); 
-	            wsheet.addCell(label); 
-	            label = new Label(9, 2, "13580363581"); 
-	            wsheet.addCell(label); 
-	            label = new Label(10, 2, ""); 
-	            wsheet.addCell(label); 
-	            label = new Label(11, 2, "广州市越秀区东风东路745号之二金广大厦"); 
-	            wsheet.addCell(label);
-	            label = new Label(12, 2, ""); 
-	            wsheet.addCell(label);
-	            label = new Label(13, 2, ""); 
-	            wsheet.addCell(label);
-	            label = new Label(14, 2, "510000"); 
-	            wsheet.addCell(label);
-	            label = new Label(15, 2, "广州市"); 
-	            wsheet.addCell(label);
-	            label = new Label(16, 2, "CN"); 
-	            wsheet.addCell(label);
-	            label = new Label(17, 2, "16/2/16"); //下单日期
-	            wsheet.addCell(label);
-	            label = new Label(18, 2, ""); 
-	            wsheet.addCell(label);
-	            label = new Label(19, 2, "0"); 
-	            wsheet.addCell(label);
-	            label = new Label(20, 2, "Ref001"); 
-	            wsheet.addCell(label);
-	            label = new Label(21, 2, "1"); 
-	            wsheet.addCell(label);
-	            label = new Label(22, 2, "1"); 
-	            wsheet.addCell(label);
-	            label = new Label(23, 2, "1"); 
-	            wsheet.addCell(label);
-	            label = new Label(24, 2, ""); 
-	            wsheet.addCell(label);
-	            label = new Label(25, 2, "baby products"); 
-	            wsheet.addCell(label);
-	            label = new Label(26, 2, "1"); 
-	            wsheet.addCell(label);
-	            label = new Label(27, 2, "7"); 
-	            wsheet.addCell(label);
-	            label = new Label(28, 2, "100"); 
-	            wsheet.addCell(label);
-	            label = new Label(29, 2, "1901"); 
-	            wsheet.addCell(label);
-	            label = new Label(30, 2, "nl"); 
-	            wsheet.addCell(label);
 
 	            
 	            wwb.write(); 
@@ -287,12 +230,12 @@ public class writeExcel extends HttpServlet {
  
          // 填写消息
          //messageBodyPart.setText("test电子邮件测试内容");
-         messageBodyPart.setContent("寄件人：Gui Chen\n" +
-         		"提货地址：Pensionarispad 16, Delft, Netherlands\n"+
-        		 "电话：0651941962\n"+
-         		"邮箱：thomas65300826@gmail.com\n"+
-        		 "提货日期：16/02/2016\n"+
-         		"是否打印单：否\n", "text/plain;charset=gb2312");
+         messageBodyPart.setContent("寄件人:"+request.getParameter("sender")+"\n" +
+         		"提货地址："+request.getParameter("senderAddress")+"\n"+
+        		 "电话："+request.getParameter("senderPhoneNumber")+"\n"+
+         		"邮箱："+request.getParameter("senderEmail")+"\n"+
+        		 "提货日期："+request.getParameter("CollectionDate")+"\n"+
+         		"是否打印单："+request.getParameter("formPrint")+"\n", "text/plain;charset=gb2312");
          // 创建一个多部分消息
          Multipart multipart = new MimeMultipart();
  
@@ -314,7 +257,7 @@ public class writeExcel extends HttpServlet {
          message.saveChanges();
          Transport.send(message);
          deleteFile(filename);
-         response.sendRedirect("index.jsp?success=yes");
+         response.sendRedirect("Form.jsp?success=yes");
          response.flushBuffer(); 
          
          }
