@@ -445,7 +445,7 @@
 				+ '										</div>'
 				+ '										<div class="jw-element-form-group">'
 				+ '											<label class="jw-element-form-label"'+
-'												for="packageValue'+number+'">包裹总价值（单位默认欧元，只填数字即可,请填不大于150欧)'
+'												for="packageValue'+number+'">包裹总价值（单位默认欧元,只填数字即可,115欧元为上限)'
 				+ '												*</label>'
 				+ '											<div class="jw-element-form-content ">'
 				+ '												<input type="number" required = "true"'+'onafterpaste="this.value=this.value.replace(/\D/g,\'\')" onkeyup="this.value=this.value.replace(/\D/g,\'\')"'+
