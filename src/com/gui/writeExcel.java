@@ -35,13 +35,14 @@ public class writeExcel extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=utf-8");
         Date d = new Date(); 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_kkmmss "); 
         String random = sdf.format(d); 
         String path = System.getProperty("user.dir");
-        String targetFile = "Gui Chen"+random + ".xls"; 
-        request.setCharacterEncoding("utf-8");
-        response.setContentType("text/html;charset=utf-8");
+        String targetFile = MimeUtility.encodeText("Order from "+request.getParameter("sender")+"--", "UTF-8", "B") + random + ".xls"; 
+
 		 try { 
 
 	            //response.setContentType("application/vnd.ms-excel"); 
@@ -118,11 +119,20 @@ public class writeExcel extends HttpServlet {
 	            wsheet.addCell(label);
 	   ///////////////////////////////////////////////////////////
 				 int packgeAmount = Integer.parseInt(request.getParameter("packageAmount"));
-				 System.out.print("/n package amount is:"+packgeAmount);
-			     SimpleDateFormat orderDateFormater = new SimpleDateFormat("MM/dd/yy"); 
+				 //System.out.print("/n package amount is:"+packgeAmount);
+			     SimpleDateFormat orderDateFormater = new SimpleDateFormat("dd/MM/yy"); 
 			     String orderDateFormated = orderDateFormater.format(d); 
 	             for(int i = 0; i<packgeAmount;i++){
+
 	            	int packageNumber = i+1;
+	            	
+	 				String[] attribute = request.getParameterValues("packageAttribute"+packageNumber);
+	 				String wholeAttribute ="";
+	 				for (int a = 0; a < attribute.length; a++) {
+	 						wholeAttribute=wholeAttribute+attribute[a]+",";
+	 					
+	 				}
+	 	            //System.out.print("\n the attributes are :"+wholeAttribute+"\n");
 	            	label = new Label(0, packageNumber, ""); 
 	 	            wsheet.addCell(label); 
 	 	            label = new Label(1, packageNumber, ""); 
@@ -173,7 +183,7 @@ public class writeExcel extends HttpServlet {
 	 	            wsheet.addCell(label);
 	 	            label = new Label(24, packageNumber, ""); 
 	 	            wsheet.addCell(label);
-	 	            label = new Label(25, packageNumber, request.getParameter("packageAttribute"+packageNumber)); //packageAttribute
+	 	            label = new Label(25, packageNumber,wholeAttribute); //packageAttribute
 	 	            wsheet.addCell(label);
 	 	            label = new Label(26, packageNumber, "1"); 
 	 	            wsheet.addCell(label);
@@ -205,11 +215,11 @@ public class writeExcel extends HttpServlet {
 		 
 	 try{
 		 
-         String userName="chengui1989@sina.com";
-         String password="thomas19891210";
+         String userName="aectrading@sina.com";
+         String password="aectrading";
          String smtp_server="smtp.sina.com";
          String from_mail_address=userName;
-         String to_mail_address="thomas653008262@163.com";
+         String to_mail_address="asiaeuroconnect@gmail.com";
          Authenticator auth=new PopupAuthenticator(userName,password);
          Properties mailProps=new Properties();
          mailProps.put("mail.smtp.host", smtp_server);
@@ -224,7 +234,7 @@ public class writeExcel extends HttpServlet {
          message.setFrom(new InternetAddress(from_mail_address));
          message.setRecipient(Message.RecipientType.TO, new InternetAddress(to_mail_address));
          //message.setSubject("测试邮件");
-         message.setSubject(MimeUtility.encodeText("Order from Gui Chen", "UTF-8", "B"));
+         message.setSubject(MimeUtility.encodeText("Order from "+request.getParameter("sender"), "UTF-8", "B"));
         // message.setContent("test content", "text/plain;charset=gb2312");
          
          // 创建消息部分 

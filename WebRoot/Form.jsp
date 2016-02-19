@@ -9,6 +9,50 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
+<style type="text/css">
+#massage_box {
+	position: absolute;
+	left: expression((body.clientWidth-350)/2 );
+	top: expression(body.scrollTop +(body.clientHeight-this.offsetHeight)/2 );
+	width: 350px;
+	height: 130px;
+	filter: dropshadow(color =#666666, offx =3, offy = 3, positive =2);
+	z-index: 2;
+	visibility: hidden
+}
+
+#mask {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: expression(body.clientWidth);
+	height: expression(body.scrollHeight >  body.clientHeight ? body.scrollHeight :body.clientHeight);
+	background: #666;
+	filter: ALPHA(opacity = 60);
+	z-index: 1;
+	visibility: hidden
+}
+
+.massage {
+	border: #036 solid;
+	border-width: 1 1 3 1;
+	width: 95%;
+	height: 95%;
+	background: #fff;
+	color: #036;
+	font-size: 12px;
+	line-height: 150%
+}
+
+.header {
+	background: #554295;
+	height: 10%;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	padding: 3 5 0 5;
+	color: #fff
+}
+</style>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
@@ -55,7 +99,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	
+
 <!--  -->
 <script type="text/javascript">
 	function HS_DateAdd(interval, number, date) {
@@ -338,7 +382,7 @@
 				+'for="receiver'+number+'">包裹收件人'
 				+ '*</label>'
 				+ '<div class="jw-element-form-content ">'
-				+ '<input type="text"'
+				+ '<input type="text" required = "true"'
 				+'name="receiver'+number+'"'
 				+'id="receiver'+number+'"'
 				+'class=" jw-element-form-input-text" value="">'
@@ -349,7 +393,7 @@
 				+'for="receiverPhone'+number+'">包裹电话'
 				+ '*</label>'
 				+ '<div class="jw-element-form-content ">'
-				+ '<input type="text"'
+				+ '<input type="text" required = "true"'
 				+'name="receiverPhone'+number+'"'
 				+'id="receiverPhone'+number+'"'
 				+'class=" jw-element-form-input-text" value="">'
@@ -360,7 +404,7 @@
 'for="receiverAddress'+number+'">包裹地址（不填省市）'
 				+ '*</label>'
 				+ '<div class="jw-element-form-content ">'
-				+ '<input type="text"'+
+				+ '<input type="text" required = "true"'+
 'name="receiverAddress'+number+'"'+
 'id="receiverAddress'+number+'"'+
 'class=" jw-element-form-input-text" value="">'
@@ -371,7 +415,7 @@
 'for="receiverPostcode'+number+'">包裹邮编'
 				+ '*</label>'
 				+ '<div class="jw-element-form-content ">'
-				+ '<input type="text"'+
+				+ '<input type="text" required = "true"'+
 'name="receiverPostcode'+number+'"'+
 'id="receiverPostcode'+number+'"'+
 'class=" jw-element-form-input-text" value="">'
@@ -382,7 +426,7 @@
 'for="receiverCity'+number+'">包裹省市'
 				+ '*</label>'
 				+ '<div class="jw-element-form-content ">'
-				+ '<input type="text"'+
+				+ '<input type="text" required = "true"'+
 'name="receiverCity'+number+'"'+
 'id="receiverCity'+number+'"'+
 'class=" jw-element-form-input-text" value="">'
@@ -390,10 +434,10 @@
 				+ '										</div>'
 				+ '										<div class="jw-element-form-group">'
 				+ '											<label class="jw-element-form-label"'+
-'												for="packageWeight'+number+'">包裹重量'
+'												for="packageWeight'+number+'">包裹重量（Kg）'
 				+ '												*</label>'
 				+ '											<div class="jw-element-form-content ">'
-				+ '												<input type="text"'+
+				+ '												<input type="number" required = "true"'+'onafterpaste="this.value=this.value.replace(/\D/g,\'\')" onkeyup="this.value=this.value.replace(/\D/g,\'\')"'+
 '													name="packageWeight'+number+'"'+
 '													id="packageWeight'+number+'"'+
 '													class=" jw-element-form-input-text" value="">'
@@ -401,10 +445,10 @@
 				+ '										</div>'
 				+ '										<div class="jw-element-form-group">'
 				+ '											<label class="jw-element-form-label"'+
-'												for="packageValue'+number+'">包裹总价值（单位默认欧元，只填数字即可)'
+'												for="packageValue'+number+'">包裹总价值（单位默认欧元，只填数字即可,请填不大于150欧)'
 				+ '												*</label>'
 				+ '											<div class="jw-element-form-content ">'
-				+ '												<input type="text"'+
+				+ '												<input type="number" required = "true"'+'onafterpaste="this.value=this.value.replace(/\D/g,\'\')" onkeyup="this.value=this.value.replace(/\D/g,\'\')"'+
 '													name="packageValue'+number+'"'+
 '													id="packageValue'+number+'"'+
 '													class=" jw-element-form-input-text" value="">'
@@ -481,8 +525,38 @@
 </script>
 
 <script type="text/javascript">
-	function XXX() {
-		displayMessage();
+	function checkBox() {
+		//
+		var packageNumber = Number($('#packageAmount').val());
+		for ( var p = 1; p <= packageNumber; p++) {
+			var weight= document.getElementById("packageWeight" + p).value;//document.getElementsByName("packageWeight" + p).value;
+			var value = document.getElementById("packageValue" + p).value;
+
+			if(weight<=0){
+				alert("包裹" + p + "重量不能小于0！");
+					return false;
+			}else if(value<0){
+				alert("包裹" + p + "价值不能小于0！");
+					return false;
+			}else if(value>150){
+				alert("包裹" + p + "价值不能大于150欧！");
+					return false;
+					}
+		}
+		for ( var p = 1; p <= packageNumber; p++) {
+			var ids = document.getElementsByName("packageAttribute" + p);
+			var flag = false;
+			for ( var i = 0; i < ids.length; i++) {
+				if (ids[i].checked) {
+					flag = true;
+					break;
+				}
+			}
+			if (!flag) {
+				alert("包裹" + p + "属性请最少选择一项！");
+				return false;
+			}
+		}
 	}
 
 	function displayMessage() {
@@ -523,6 +597,10 @@
 			Obj = '';
 		}
 	}
+
+	function displayWait() {
+		displayMessage();
+	}
 </script>
 
 </head>
@@ -559,25 +637,34 @@
 				<nav class="menu clear jw-menu-collapse">
 				<ul id="jw-menu" class="jw-menu jw-menu-horizontal">
 					<li class="jw-menu-item"><a id="jouwweb-page-2329933"
-						class="jw-menu-link" href="http://www.aectrading.nl/">Home</a></li>
+						class="jw-menu-link" href="http://www.aectrading.nl/">Home</a>
+					</li>
 					<li class="jw-menu-item"><a id="jouwweb-page-2330478"
-						class="jw-menu-link" href="http://www.aectrading.nl/-6">使用需知</a></li>
+						class="jw-menu-link" href="http://www.aectrading.nl/-6">使用需知</a>
+					</li>
 					<li class="jw-menu-item jw-menu-is-active"><a
 						id="jouwweb-page-2330094"
 						class="jw-menu-link  js-active-menu-item"
-						href="http://www.aectrading.nl/-1">在线下单</a></li>
+						href="asiaeuroconnect.aectrading.ali-sh.goodrain.net:10080">在线下单</a>
+					</li>
 					<li class="jw-menu-item"><a id="jouwweb-page-2348588"
-						class="jw-menu-link" href="http://www.aectrading.nl/-8">提货路线</a></li>
+						class="jw-menu-link" href="http://www.aectrading.nl/-8">提货路线</a>
+					</li>
 					<li class="jw-menu-item"><a id="jouwweb-page-2330034"
-						class="jw-menu-link" href="http://www.aectrading.nl/-7">在线查询</a></li>
+						class="jw-menu-link" href="http://www.aectrading.nl/-7">在线查询</a>
+					</li>
 					<li class="jw-menu-item"><a id="jouwweb-page-2330459"
-						class="jw-menu-link" href="http://www.aectrading.nl/-3">资料下载</a></li>
+						class="jw-menu-link" href="http://www.aectrading.nl/-3">资料下载</a>
+					</li>
 					<li class="jw-menu-item"><a id="jouwweb-page-2330473"
-						class="jw-menu-link" href="http://www.aectrading.nl/-5">最新消息</a></li>
+						class="jw-menu-link" href="http://www.aectrading.nl/-5">最新消息</a>
+					</li>
 					<li class="jw-menu-item"><a id="jouwweb-page-2330472"
-						class="jw-menu-link" href="http://www.aectrading.nl/-4">意见反馈</a></li>
+						class="jw-menu-link" href="http://www.aectrading.nl/-4">意见反馈</a>
+					</li>
 					<li class="jw-menu-item"><a id="jouwweb-page-2332811"
-						class="jw-menu-link" href="http://www.aectrading.nl/-2">常见问题</a></li>
+						class="jw-menu-link" href="http://www.aectrading.nl/-2">常见问题</a>
+					</li>
 				</ul>
 				</nav>
 
@@ -604,28 +691,30 @@
 									data-jw-element-id="23482139"
 									class="jw-intent jw-tree-node jw-element  jw-node-is-first-child jw-node-is-last-child jw-contact-form">
 
-									<form name="wholeform" action="writeExcel" method="POST">
+									<form name="wholeform" action="writeExcel" method="POST"
+										onsubmit="displayWait();">
 										<div class="jw-element-form-group">
 											<label class="jw-element-form-label" for="sender">寄件人
 												*</label>
 											<div class="jw-element-form-content ">
-												<input type="text" name="sender" id="sender"
+												<input type="text" name="sender" id="sender" required="true"
 													class="&#x20;jw-element-form-input-text" value="">
 											</div>
 										</div>
 										<div class="jw-element-form-group">
 											<label class="jw-element-form-label" for="senderAddress">提货地址
-												*</label>
+												（填街名门牌号，城市名和邮编）*</label>
 											<div class="jw-element-form-content ">
 												<input type="text" name="senderAddress" id="senderAddress"
-													class="&#x20;jw-element-form-input-text" value="">
+													required="true" class="&#x20;jw-element-form-input-text"
+													value="">
 											</div>
 										</div>
 										<div class="jw-element-form-group">
 											<label class="jw-element-form-label" for="senderPhoneNumber">寄件人电话
 												*</label>
 											<div class="jw-element-form-content ">
-												<input type="text" name="senderPhoneNumber"
+												<input type="text" name="senderPhoneNumber" required="true"
 													id="senderPhoneNumber"
 													class="&#x20;jw-element-form-input-text" value="">
 											</div>
@@ -635,14 +724,16 @@
 												*</label>
 											<div class="jw-element-form-content ">
 												<input type="email" name="senderEmail" id="senderEmail"
-													class="&#x20;jw-element-form-input-text" value="">
+													required="true" class="&#x20;jw-element-form-input-text"
+													value="">
 											</div>
 										</div>
 										<div class="jw-element-form-group">
 											<label class="jw-element-form-label" for="CollectionDate">提货日期
 												* </label>
 											<div class="jw-element-form-content ">
-												<input type="text" name="CollectionDate"  onfocus="HS_setDate(this)"
+												<input type="text" name="CollectionDate"
+													onfocus="HS_setDate(this)" required="true"
 													class="dynamic-form-date&#x20;jw-element-form-input-text"
 													id="CollectionDate" value="">
 											</div>
@@ -676,8 +767,9 @@
 																type="button" class="btn btn-default btn-md"
 																id="reduceBtn" onclick="reducePackage()">
 																<span class="glyphicon glyphicon-minus"></span>
-															</button> </span> <input type="text" class="form-control" value='1' name = "packageAmount"
-															id="packageAmount"> <span class="input-group-btn">
+															</button> </span> <input type="text" class="form-control" value='1'
+															name="packageAmount" id="packageAmount"> <span
+															class="input-group-btn">
 															<button style="color:#FFFFFF;background-color:#1C86EE;"
 																type="button" class="btn btn-default btn-md" id="addBtn"
 																onclick="addPackage()">
@@ -705,6 +797,7 @@
 													class="&#x20;jw-element-form-input-text" value="">
 											</div>
 										</div>
+										<!--  
 										<div class="jw-element-form-group">
 											<div class="jw-element-form-content jw-element-form-offset">
 												<div class="jw-element-form-checkbox">
@@ -715,19 +808,21 @@
 												</div>
 											</div>
 										</div>
+										-->
 										<div class="jw-element-form-group">
-											<button type="submit" name="submit" onclick="XXX()"
+											<button type="submit" name="submit" onclick="return checkBox()"
 												class="&#x20;jw-element-form-offset&#x20;jw-btn&#x20;jw-btn-sm&#x20;jw-btn-roundness-default&#x20;jw-btn-style-default&#x20;jw-btn__default-color"
 												value="">提交</button>
 										</div>
-										
+
 										<!--  -->
-										<div id="massage_box" onclick="hiddenMessage();" style="font-family:SimSun;">
+										<div id="massage_box" onclick="hiddenMessage();"
+											style="font-family:SimSun;">
 											<div class="massage">
 												<div class="header" onmousedown="MDown(massage_box);">
 													<div
 														style="display: inline; width: 150px; position: absolute">
-														正在加载中 ... ...</div>
+														正在提交中 ... ...</div>
 													<span
 														onClick="massage_box.style.visibility='hidden'; mask.style.visibility='hidden'"
 														style="float: right; display: inline; cursor: hand"><img
@@ -739,14 +834,14 @@
 												</div>
 												<div
 													style="margin-top: 50px; width: 136px; height: 128px; float: right;">
-													查询请求已发送 <br /> 等待返回查询结果
+													提交请求已发送 <br /> 等待返回提交结果
 												</div>
 											</div>
 										</div>
 										<div id="mask" onclick="hiddenMessage();"></div>
-										
+
 										<!--  -->
-										
+
 									</form>
 								</div>
 							</div>
@@ -818,5 +913,5 @@
 		src="http://a.jwwb.nl/assets//js/lib/moment.js?bust=0e2906f1781abbe5ef8e8178185f1c3a"></script>
 	<script type="text/javascript"
 		src="http://a.jwwb.nl/assets//js/lib/pikaday.js?bust=0fb6465157b03444e5a078abee7e8449"></script>
-</body>  
+</body>
 </html>
