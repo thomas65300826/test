@@ -37,7 +37,9 @@ public class writeExcel extends HttpServlet {
 			throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
-        Date d = new Date(); 
+        long currentTime = System.currentTimeMillis();
+        currentTime -=7*60*60*1000;
+        Date d = new Date(currentTime); 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_kkmmss "); 
         String random = sdf.format(d); 
         String path = System.getProperty("user.dir");
@@ -120,7 +122,7 @@ public class writeExcel extends HttpServlet {
 	   ///////////////////////////////////////////////////////////
 				 int packgeAmount = Integer.parseInt(request.getParameter("packageAmount"));
 				 //System.out.print("/n package amount is:"+packgeAmount);
-			     SimpleDateFormat orderDateFormater = new SimpleDateFormat("dd/MM/yy"); 
+			     SimpleDateFormat orderDateFormater = new SimpleDateFormat("yy/MM/dd"); 
 			     String orderDateFormated = orderDateFormater.format(d); 
 	             for(int i = 0; i<packgeAmount;i++){
 
