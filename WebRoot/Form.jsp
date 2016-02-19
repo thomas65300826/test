@@ -644,8 +644,8 @@
 					</li>
 					<li class="jw-menu-item jw-menu-is-active"><a
 						id="jouwweb-page-2330094"
-						class="jw-menu-link  js-active-menu-item"
-						href="asiaeuroconnect.aectrading.ali-sh.goodrain.net:10080">在线下单</a>
+						class="jw-menu-link"
+						href="http://asiaeuroconnect.aectrading.ali-sh.goodrain.net:10080">在线下单</a>
 					</li>
 					<li class="jw-menu-item"><a id="jouwweb-page-2348588"
 						class="jw-menu-link" href="http://www.aectrading.nl/-8">提货路线</a>
