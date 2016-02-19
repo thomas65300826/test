@@ -503,6 +503,13 @@
 				+ '														personal-use goods个人二手物品</label>'
 				+ ''
 				+ '												</div>'
+				+ '												<div class="jw-element-form-checkbox">'
+				+ '													<label><input type="checkbox"'+
+'														name="packageAttribute'+number+'"'+
+'														value="food supplements">'
+				+ '														food supplements保健品</label>'
+				+ ''
+				+ '												</div>'
 				+ '											</div>'
 				+ '										</div>' +
 

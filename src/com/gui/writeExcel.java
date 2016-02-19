@@ -131,8 +131,7 @@ public class writeExcel extends HttpServlet {
 	 				String[] attribute = request.getParameterValues("packageAttribute"+packageNumber);
 	 				String wholeAttribute ="";
 	 				for (int a = 0; a < attribute.length; a++) {
-	 						wholeAttribute=wholeAttribute+attribute[a]+",";
-	 					
+	 						wholeAttribute=wholeAttribute+attribute[a]+";";
 	 				}
 	 	            //System.out.print("\n the attributes are :"+wholeAttribute+"\n");
 	            	label = new Label(0, packageNumber, ""); 
