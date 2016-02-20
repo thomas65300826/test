@@ -57,13 +57,7 @@
 	color: #fff
 }
 
-body {
-	margin: 0;
-	padding: 0;
-	font: normal 18px Verdana, Arial, Helvetica, sans-serif;
-	line-height: 1.8em;
-	min-width: 980px;
-}
+
 
 #cover_div {
 	left: 0px;
@@ -997,10 +991,10 @@ body {
 
 		<div id="cover_context_div" class="cover_context_div">
 			<div>
-				<font color=white>正在提交中……</font>
+				<font size = "3" color="white">正在提交中……</font>
 			</div>
 			<div
-				style="margin-top: 20px; margin-left: 7px; width: 128px; height: 128px; float: left;">
+				style="margin-top: 20px; margin-left: 3px; width: 128px; height: 128px; float: left;">
 				<img src="images/cxz_ly.gif" />
 			</div>
 

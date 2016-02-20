@@ -205,18 +205,7 @@ public class writeExcel extends HttpServlet {
 	            wwb.write(); 
 	            wwb.close(); 
 	            customerForm.close(); 
-	            
-	            
-	   
-	        } catch (Exception e) { 
-	            System.out.println("生成信息表(Excel格式)时出错："); 
-	            e.printStackTrace();
-	            response.sendRedirect("Form.jsp?success=no");
-	        } 
-		 
-		 
-	 try{
-		 
+/////////////////////////////////send mail///////////////////////
          String userName="aectrading@sina.com";
          String password="aectrading";
          String smtp_server="smtp.sina.com";
@@ -272,15 +261,17 @@ public class writeExcel extends HttpServlet {
          Transport.send(message);
          deleteFile(filename);
          response.sendRedirect("Form.jsp?success=yes");
-         response.flushBuffer(); 
+        
          
          }
 	 catch(Exception ex){
          System.err.println("邮件发送失败的原因是："+ex.getMessage());
          System.err.println("具体的错误原因");
          ex.printStackTrace(System.err);
+         ex.printStackTrace();
          response.sendRedirect("Form.jsp?success=no");
-         }
+         }finally{ response.flushBuffer(); }
+		 
          
           
 	}
