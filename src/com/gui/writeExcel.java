@@ -43,7 +43,8 @@ public class writeExcel extends HttpServlet {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_kkmmss"); 
         String random = sdf.format(d); 
         String path = System.getProperty("user.dir");
-        String filename = "Order from "+request.getParameter("sender")+ random + ".xls"; 
+        String filename = "Order from "+request.getParameter("sender")+ random + ".xls";
+        String targetFile = path+"/"+filename;
         System.out.print("\n 文件filename:"+filename+"\n");
         System.out.print("\n 信息some information:sender:"+request.getParameter("sender")+"\n receiver1"+request.getParameter("receiver")+"\n");
         
@@ -208,7 +209,17 @@ public class writeExcel extends HttpServlet {
          String password="aectrading";
          String smtp_server="smtp.sina.com";
          String from_mail_address=userName;
-         String to_mail_address="asiaeuroconnect@gmail.com";
+         String[] to_mail_address={"thomas653008262@163.com","asiaeuroconnect@gmail.com"};
+         //String to_mail_address="thomas653008262@163.com";
+         //String BCC_to_mail_address="aectrading@sina.com";
+         
+         InternetAddress[] internetAddressTo = new InternetAddress[to_mail_address.length];
+         for (int nAdd = 0; nAdd < to_mail_address.length; nAdd++){ 
+        	 internetAddressTo[nAdd] = new InternetAddress(to_mail_address[nAdd]); 
+         } 
+         
+         //InternetAddress internetAddressTo = new InternetAddress(to_mail_address);
+         
          Authenticator auth=new PopupAuthenticator(userName,password);
          Properties mailProps=new Properties();
          mailProps.put("mail.smtp.host", smtp_server);
@@ -221,8 +232,9 @@ public class writeExcel extends HttpServlet {
          mailSession.setDebug(true);
          MimeMessage message=new MimeMessage(mailSession);
          message.setFrom(new InternetAddress(from_mail_address));
-         message.setRecipient(Message.RecipientType.TO, new InternetAddress(to_mail_address));
-         //message.setSubject("测试邮件");
+         message.setRecipients(Message.RecipientType.BCC, internetAddressTo);
+        
+         //message.setRecipient(Message.RecipientType.BCC, internetAddressTo);
          message.setSubject(MimeUtility.encodeText("Order from "+request.getParameter("sender"), "UTF-8", "B"));
         // message.setContent("test content", "text/plain;charset=gb2312");
          
@@ -247,7 +259,7 @@ public class writeExcel extends HttpServlet {
          
          // 第二部分是附件
          messageBodyPart = new MimeBodyPart();
-         String targetFile = path+"/"+filename;
+
          DataSource source = new FileDataSource(targetFile);
          messageBodyPart.setDataHandler(new DataHandler(source));
          messageBodyPart.setFileName(MimeUtility.encodeText(filename, "UTF-8", "B"));
@@ -257,9 +269,11 @@ public class writeExcel extends HttpServlet {
          message.setContent(multipart);
          message.saveChanges();
          Transport.send(message);
-         deleteFile(targetFile);
-         response.sendRedirect("Form.jsp?success=yes");
-        
+         if(new File(targetFile).exists()){
+        	 deleteFile(targetFile);
+        	 System.out.print("\n target file do exist!!\n");
+         }
+         response.sendRedirect("Form.jsp?success=yes");      
          
          }
 	 catch(Exception ex){
@@ -267,6 +281,10 @@ public class writeExcel extends HttpServlet {
          System.err.println("具体的错误原因");
          ex.printStackTrace(System.err);
          ex.printStackTrace();
+         if(new File(targetFile).exists()){
+        	 deleteFile(targetFile);
+        	 System.out.print("\n target file do exist when error catched!!\n");
+         }
          response.sendRedirect("Form.jsp?success=no");
          }finally{ response.flushBuffer(); }
 		 
