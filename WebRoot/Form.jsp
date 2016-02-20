@@ -584,7 +584,7 @@
 			var postcode = document.getElementById("receiverPostcode" + p).value;
 			var pattern = /\d{6}/;
 			if (!pattern.test(postcode)) {
-				alert("包裹" + p + "邮编不是6位数字！");
+				alert("包裹" + p + "邮编请填6位数字！");
 				return false;
 			}
 			if (weight <= 0) {
