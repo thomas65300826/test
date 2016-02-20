@@ -40,17 +40,19 @@ public class writeExcel extends HttpServlet {
         long currentTime = System.currentTimeMillis();
         currentTime -=7*60*60*1000;
         Date d = new Date(currentTime); 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_kkmmss "); 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_kkmmss"); 
         String random = sdf.format(d); 
         String path = System.getProperty("user.dir");
-        String targetFile = MimeUtility.encodeText("Order from "+request.getParameter("sender")+"--", "UTF-8", "B") + random + ".xls"; 
-
+        String filename = "Order from "+request.getParameter("sender")+ random + ".xls"; 
+        System.out.print("\n 文件filename:"+filename+"\n");
+        System.out.print("\n 信息some information:sender:"+request.getParameter("sender")+"\n receiver1"+request.getParameter("receiver")+"\n");
+        
 		 try { 
 
 	            //response.setContentType("application/vnd.ms-excel"); 
-	            //response.addHeader("Content-Disposition", "attachment;   filename=\"" + targetFile + "\""); 
+	            //response.addHeader("Content-Disposition", "attachment;   filename=\"" + filename + "\""); 
 	            
-	            FileOutputStream customerForm = new FileOutputStream(path+"/"+targetFile);
+	            FileOutputStream customerForm = new FileOutputStream(path+"/"+filename);
 	            WritableWorkbook wwb = Workbook.createWorkbook(customerForm); 
 	            // 新建一张表 
 	            WritableSheet wsheet = wwb.createSheet("Sheet1", 0); 
@@ -197,11 +199,7 @@ public class writeExcel extends HttpServlet {
 	 	            label = new Label(30, packageNumber, "nl"); 
 	 	            wsheet.addCell(label);
 	             }
-	            
-	           
-	      /////////////////////////////////////////////////////////
-
-	            
+	      
 	            wwb.write(); 
 	            wwb.close(); 
 	            customerForm.close(); 
@@ -249,17 +247,17 @@ public class writeExcel extends HttpServlet {
          
          // 第二部分是附件
          messageBodyPart = new MimeBodyPart();
-         String filename = path+"/"+targetFile;
-         DataSource source = new FileDataSource(filename);
+         String targetFile = path+"/"+filename;
+         DataSource source = new FileDataSource(targetFile);
          messageBodyPart.setDataHandler(new DataHandler(source));
-         messageBodyPart.setFileName(targetFile);
+         messageBodyPart.setFileName(MimeUtility.encodeText(filename, "UTF-8", "B"));
          multipart.addBodyPart(messageBodyPart);
 
 
          message.setContent(multipart);
          message.saveChanges();
          Transport.send(message);
-         deleteFile(filename);
+         deleteFile(targetFile);
          response.sendRedirect("Form.jsp?success=yes");
         
          
