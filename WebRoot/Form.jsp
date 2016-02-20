@@ -12,12 +12,12 @@
 <style type="text/css">
 #massage_box {
 	position: absolute;
-	left: expression(( body.clientWidth-350)/2 );
-	top: expression(body.scrollTop +( body.clientHeight-this.offsetHeight)/2
+	left: expression((   body.clientWidth-350)/2 );
+	top: expression(body.scrollTop +(   body.clientHeight-this.offsetHeight)/2
 		);
 	width: 350px;
 	height: 130px;
-	filter: dropshadow(color = #666666, offx = 3, offy =   3, positive = 2);
+	filter: dropshadow(color =   #666666, offx =   3, offy =     3, positive =   2);
 	z-index: 2;
 	visibility: hidden
 }
@@ -27,10 +27,10 @@
 	top: 0;
 	left: 0;
 	width: expression(body.clientWidth);
-	height: expression(body.scrollHeight >    body.clientHeight ?  
-		body.scrollHeight : body.clientHeight);
+	height: expression(body.scrollHeight >      body.clientHeight ?   
+		 body.scrollHeight :   body.clientHeight);
 	background: #666;
-	filter: ALPHA(opacity =   60);
+	filter: ALPHA(opacity =     60);
 	z-index: 1;
 	visibility: hidden
 }
@@ -101,10 +101,12 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	
+
 <link type="text/css" rel="stylesheet" href="css/jquery.modaldialog.css" />
-<script type="text/javascript" language="JavaScript" src="http://code.jquery.com/jquery-latest.js"> </script>
-<script type="text/javascript" language="JavaScript" src="js/jquery.modaldialog.js"> </script>
+<script type="text/javascript" language="JavaScript"
+	src="http://code.jquery.com/jquery-latest.js"> </script>
+<script type="text/javascript" language="JavaScript"
+	src="js/jquery.modaldialog.js"> </script>
 
 <!--  -->
 <script type="text/javascript">
@@ -534,6 +536,8 @@
 	var success ='<%=request.getParameter("success")%>';
 	if (success == 'yes') {
 		alert("提交成功!");
+	}else if(success == 'no') {
+		alert("提交失败!请重新填写！");
 	}
 </script>
 
@@ -549,7 +553,7 @@
 			if (!pattern.test(postcode)) {
 				alert("包裹" + p + "邮编不是6位数字！");
 				return false;
-			} 
+			}
 			if (weight <= 0) {
 				alert("包裹" + p + "重量不能小于0！");
 				return false;
@@ -619,7 +623,9 @@
 	function displayWait() {
 		displayMessage();
 	}
-
+	function WaitDia() {
+		document.getElementById("myDialog").showModal();
+	}
 </script>
 
 </head>
@@ -656,25 +662,33 @@
 				<nav class="menu clear jw-menu-collapse">
 				<ul id="jw-menu" class="jw-menu jw-menu-horizontal">
 					<li class="jw-menu-item"><a id="jouwweb-page-2329933"
-						class="jw-menu-link" href="http://www.aectrading.nl/">Home</a></li>
+						class="jw-menu-link" href="http://www.aectrading.nl/">Home</a>
+					</li>
 					<li class="jw-menu-item"><a id="jouwweb-page-2330478"
-						class="jw-menu-link" href="http://www.aectrading.nl/-6">使用需知</a></li>
+						class="jw-menu-link" href="http://www.aectrading.nl/-6">使用需知</a>
+					</li>
 					<li class="jw-menu-item jw-menu-is-active"><a
 						id="jouwweb-page-2330094" class="jw-menu-link"
 						href="http://asiaeuroconnect.aectrading.ali-sh.goodrain.net:10080">在线下单</a>
 					</li>
 					<li class="jw-menu-item"><a id="jouwweb-page-2348588"
-						class="jw-menu-link" href="http://www.aectrading.nl/-8">提货路线</a></li>
+						class="jw-menu-link" href="http://www.aectrading.nl/-8">提货路线</a>
+					</li>
 					<li class="jw-menu-item"><a id="jouwweb-page-2330034"
-						class="jw-menu-link" href="http://www.aectrading.nl/-7">在线查询</a></li>
+						class="jw-menu-link" href="http://www.aectrading.nl/-7">在线查询</a>
+					</li>
 					<li class="jw-menu-item"><a id="jouwweb-page-2330459"
-						class="jw-menu-link" href="http://www.aectrading.nl/-3">资料下载</a></li>
+						class="jw-menu-link" href="http://www.aectrading.nl/-3">资料下载</a>
+					</li>
 					<li class="jw-menu-item"><a id="jouwweb-page-2330473"
-						class="jw-menu-link" href="http://www.aectrading.nl/-5">最新消息</a></li>
+						class="jw-menu-link" href="http://www.aectrading.nl/-5">最新消息</a>
+					</li>
 					<li class="jw-menu-item"><a id="jouwweb-page-2330472"
-						class="jw-menu-link" href="http://www.aectrading.nl/-4">意见反馈</a></li>
+						class="jw-menu-link" href="http://www.aectrading.nl/-4">意见反馈</a>
+					</li>
 					<li class="jw-menu-item"><a id="jouwweb-page-2332811"
-						class="jw-menu-link" href="http://www.aectrading.nl/-2">常见问题</a></li>
+						class="jw-menu-link" href="http://www.aectrading.nl/-2">常见问题</a>
+					</li>
 				</ul>
 				</nav>
 
@@ -701,7 +715,7 @@
 									data-jw-element-id="23482139"
 									class="jw-intent jw-tree-node jw-element  jw-node-is-first-child jw-node-is-last-child jw-contact-form">
 
-									<form name="wholeform" action="writeExcel" method="POST" 
+									<form name="wholeform" action="writeExcel" method="POST"
 										onsubmit="displayWait()">
 										<div class="jw-element-form-group">
 											<label class="jw-element-form-label" for="sender">寄件人
@@ -820,8 +834,8 @@
 										</div>
 										-->
 										<div class="jw-element-form-group">
-											<button type="submit" name="submit" 
-												 onclick = "return checkBox()"
+											<button type="submit" name="submit"
+												onclick="return checkBox();"
 												class="&#x20;jw-element-form-offset&#x20;jw-btn&#x20;jw-btn-sm&#x20;jw-btn-roundness-default&#x20;jw-btn-style-default&#x20;jw-btn__default-color"
 												value="">提交</button>
 										</div>

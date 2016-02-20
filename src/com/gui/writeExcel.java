@@ -210,7 +210,8 @@ public class writeExcel extends HttpServlet {
 	   
 	        } catch (Exception e) { 
 	            System.out.println("生成信息表(Excel格式)时出错："); 
-	            e.printStackTrace(); 
+	            e.printStackTrace();
+	            response.sendRedirect("Form.jsp?success=no");
 	        } 
 		 
 		 
@@ -278,6 +279,7 @@ public class writeExcel extends HttpServlet {
          System.err.println("邮件发送失败的原因是："+ex.getMessage());
          System.err.println("具体的错误原因");
          ex.printStackTrace(System.err);
+         response.sendRedirect("Form.jsp?success=no");
          }
          
           
