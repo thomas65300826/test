@@ -12,12 +12,14 @@
 <style type="text/css">
 #massage_box {
 	position: absolute;
-	left: expression((   body.clientWidth-350)/2 );
-	top: expression(body.scrollTop +(   body.clientHeight-this.offsetHeight)/2
+	left: expression((       body.clientWidth-350)/2 );
+	top: expression(body.scrollTop +(       body.clientHeight-this.offsetHeight)/2
 		);
 	width: 350px;
 	height: 130px;
-	filter: dropshadow(color =   #666666, offx =   3, offy =     3, positive =   2);
+	filter: dropshadow(color =       #666666, offx =       3, offy =         3,
+		positive = 
+		     2);
 	z-index: 2;
 	visibility: hidden
 }
@@ -27,10 +29,10 @@
 	top: 0;
 	left: 0;
 	width: expression(body.clientWidth);
-	height: expression(body.scrollHeight >      body.clientHeight ?   
-		 body.scrollHeight :   body.clientHeight);
+	height: expression(body.scrollHeight >          body.clientHeight ?     
+		   body.scrollHeight :       body.clientHeight);
 	background: #666;
-	filter: ALPHA(opacity =     60);
+	filter: ALPHA(opacity =         60);
 	z-index: 1;
 	visibility: hidden
 }
@@ -53,6 +55,43 @@
 	font-size: 12px;
 	padding: 3 5 0 5;
 	color: #fff
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font: normal 18px Verdana, Arial, Helvetica, sans-serif;
+	line-height: 1.8em;
+	min-width: 980px;
+}
+
+#cover_div {
+	left: 0px;
+	top: 0px;
+	position: fixed;
+	display: none;
+	z-index: 10;
+	width: 100%;
+	height: 100%;
+	background: #000;
+	opacity: 0.7;
+	filter: alpha(opacity =   30);
+}
+
+#cover_context_div {
+	top: 50%;
+	left: 50%;
+	position: fixed;
+	display: none;
+	padding: 20px;
+	border: 20px solid #696969;
+	z-index: 100;
+	-webkit-box-shadow: 0px 0px 20px #000;
+	-moz-box-shadow: 0px 0px 20px #000;
+	box-shadow: 0px 0px 20px #000;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
 }
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -536,7 +575,7 @@
 	var success ='<%=request.getParameter("success")%>';
 	if (success == 'yes') {
 		alert("提交成功!");
-	}else if(success == 'no') {
+	} else if (success == 'no') {
 		alert("提交失败!请重新填写！");
 	}
 </script>
@@ -625,6 +664,29 @@
 	}
 	function WaitDia() {
 		document.getElementById("myDialog").showModal();
+	}
+
+	function cover() {
+		//mask.style.visibility = 'visible';
+		//massage_box.style.visibility = 'visible';
+		document.getElementById('cover_div').style.display = 'block';
+		document.getElementById('cover_context_div').style.display = 'block';
+		getCenter();
+	}
+	//去掉遮罩
+	function clearCover() {
+		document.getElementById('cover_div').style.display = 'none';
+		document.getElementById('cover_context_div').style.display = 'none';
+	}
+
+	//定位到浏览器中央
+	function getCenter() {
+		var width = document.getElementById('cover_context_div').offsetWidth;
+		var height = document.getElementById('cover_context_div').offsetHeight;
+		document.getElementById('cover_context_div').style.top = (document.documentElement.clientHeight - height)
+				/ 2 + 'px';
+		document.getElementById('cover_context_div').style.left = (document.documentElement.clientWidth - width)
+				/ 2 + 'px';
 	}
 </script>
 
@@ -716,7 +778,7 @@
 									class="jw-intent jw-tree-node jw-element  jw-node-is-first-child jw-node-is-last-child jw-contact-form">
 
 									<form name="wholeform" action="writeExcel" method="POST"
-										onsubmit="displayWait()">
+										onsubmit="cover();">
 										<div class="jw-element-form-group">
 											<label class="jw-element-form-label" for="sender">寄件人
 												*</label>
@@ -840,7 +902,7 @@
 												value="">提交</button>
 										</div>
 
-										<!--  -->
+										<!--  
 										<div id="massage_box" onclick="hiddenMessage();"
 											style="font-family:SimSun;">
 											<div class="massage">
@@ -865,7 +927,7 @@
 										</div>
 										<div id="mask" onclick="hiddenMessage();"></div>
 
-										<!--  -->
+										  -->
 
 									</form>
 								</div>
@@ -928,7 +990,22 @@
 			</div>
 		</div>
 	</div>
+	<!--遮罩DIV-->
+	<center>
+		<div id="cover_div" class="cover_div" '  onclick=""></div>
+		<!--遮罩内容-->
 
+		<div id="cover_context_div" class="cover_context_div">
+			<div>
+				<font color=white>正在提交中……</font>
+			</div>
+			<div
+				style="margin-top: 20px; margin-left: 7px; width: 128px; height: 128px; float: left;">
+				<img src="images/cxz_ly.gif" />
+			</div>
+
+		</div>
+	</center>
 	<script type="text/javascript"
 		src="http://a.jwwb.nl/assets/js/frontend/head_frontend.js?bust=4d4b920218030815c539be04edbc0486"></script>
 	<script type="text/javascript"
