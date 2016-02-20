@@ -815,7 +815,7 @@
 												<input type="text" name="CollectionDate"
 													onfocus="HS_setDate(this)" required="true"
 													class="dynamic-form-date&#x20;jw-element-form-input-text"
-													id="CollectionDate" value="">
+													id="CollectionDate" value="" readonly>
 											</div>
 										</div>
 										<div class="jw-element-form-group">
