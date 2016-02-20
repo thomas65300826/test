@@ -854,7 +854,7 @@ body {
 																id="reduceBtn" onclick="reducePackage()">
 																<span class="glyphicon glyphicon-minus"></span>
 															</button> </span> <input type="text" class="form-control" value='1'
-															name="packageAmount" id="packageAmount"> <span
+															name="packageAmount" id="packageAmount" readonly> <span
 															class="input-group-btn">
 															<button style="color:#FFFFFF;background-color:#1C86EE;"
 																type="button" class="btn btn-default btn-md" id="addBtn"
