@@ -43,10 +43,10 @@ public class writeExcel extends HttpServlet {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_kkmmss"); 
         String random = sdf.format(d); 
         String path = System.getProperty("user.dir");
-        String filename = "Order from "+request.getParameter("sender")+ random + ".xls";
+        String filename = "Order from "+request.getParameter("sender")+"--"+ random + ".xls";
         String targetFile = path+"/"+filename;
         System.out.print("\n 文件filename:"+filename+"\n");
-        System.out.print("\n 信息some information:sender:"+request.getParameter("sender")+"\n receiver1"+request.getParameter("receiver")+"\n");
+        System.out.print("\n 信息some information:sender:"+request.getParameter("sender")+"\n receiver1"+request.getParameter("receiver1")+"\n");
         
 		 try { 
 
@@ -209,7 +209,7 @@ public class writeExcel extends HttpServlet {
          String password="aectrading";
          String smtp_server="smtp.sina.com";
          String from_mail_address=userName;
-         String[] to_mail_address={"thomas653008262@163.com","asiaeuroconnect@gmail.com"};
+         String[] to_mail_address={"thomas653008262@163.com", "asiaeuroconnect@gmail.com"};
          //String to_mail_address="thomas653008262@163.com";
          //String BCC_to_mail_address="aectrading@sina.com";
          
@@ -236,19 +236,17 @@ public class writeExcel extends HttpServlet {
         
          //message.setRecipient(Message.RecipientType.BCC, internetAddressTo);
          message.setSubject(MimeUtility.encodeText("Order from "+request.getParameter("sender"), "UTF-8", "B"));
-        // message.setContent("test content", "text/plain;charset=gb2312");
-         
+                
          // 创建消息部分 
          BodyPart messageBodyPart = new MimeBodyPart();
  
          // 填写消息
-         //messageBodyPart.setText("test电子邮件测试内容");
          messageBodyPart.setContent("寄件人:"+request.getParameter("sender")+"\n" +
          		"提货地址："+request.getParameter("senderAddress")+"\n"+
         		 "电话："+request.getParameter("senderPhoneNumber")+"\n"+
          		"邮箱："+request.getParameter("senderEmail")+"\n"+
         		 "提货日期："+request.getParameter("CollectionDate")+"\n"+
-         		"是否打印单："+request.getParameter("formPrint")+"\n", "text/plain;charset=gb2312");
+         		"是否打印单："+request.getParameter("formPrint")+"\n", "text/plain;charset=UTF-8");
          // 创建一个多部分消息
          Multipart multipart = new MimeMultipart();
  
