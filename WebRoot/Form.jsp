@@ -564,8 +564,7 @@
 
 <script> 
 //取出传回来的参数error并与yes比较
-	var success ='<%=request.getParameter("success")%>
-	';
+	var success ='<%=request.getParameter("success")%>';
 	if (success == 'yes') {
 		alert("提交成功!");
 	} else if (success == 'no') {
