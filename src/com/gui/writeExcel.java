@@ -56,47 +56,47 @@ public class writeExcel extends HttpServlet {
 
 		/***************** Get all the request parameters of Sender ************************/
 		int iPackageAmount = 0;
-		String sPackageAmount = null;
-		if ((sPackageAmount = request.getParameter("packageAmount")) == null) {
+		String sPackageAmount = request.getParameter("packageAmount");
+		if (sPackageAmount == null || sPackageAmount == "") {
 			System.out.print("\n Couldn't get the package number \n");
 			response.sendRedirect("Form.jsp?success=no");
 		} else {
 			iPackageAmount = Integer.parseInt(sPackageAmount);
 		}
 
-		String senderName = null;
-		if ((senderName = request.getParameter("sender")) == null) {
+		String senderName = request.getParameter("sender");
+		if (senderName == null || senderName == "") {
 			System.out.print("\n Couldn't get the sender name \n");
 			response.sendRedirect("Form.jsp?success=no");
 		}
 		
 
-		String senderAddress = null;
-		if ((senderAddress = request.getParameter("senderAddress")) == null) {
+		String senderAddress = request.getParameter("senderAddress");
+		if (senderAddress == null || senderAddress == "") {
 			System.out.print("\n Couldn't get the senderAddress \n");
 			response.sendRedirect("Form.jsp?success=no");
 		}
 
-		String senderPhoneNumber = null;
-		if ((senderPhoneNumber = request.getParameter("senderPhoneNumber")) == null) {
+		String senderPhoneNumber = request.getParameter("senderPhoneNumber");
+		if (senderPhoneNumber == null || senderPhoneNumber == "") {
 			System.out.print("\n Couldn't get the sender Phone Number \n");
 			response.sendRedirect("Form.jsp?success=no");
 		}
 
-		String senderEmail = null;
-		if ((senderEmail = request.getParameter("senderEmail")) == null) {
+		String senderEmail = request.getParameter("senderEmail");
+		if (senderEmail == null || senderEmail == "") {
 			System.out.print("\n Couldn't get the sender Email \n");
 			response.sendRedirect("Form.jsp?success=no");
 		}
 
-		String CollectionDate = null;
-		if ((CollectionDate = request.getParameter("CollectionDate")) == null) {
+		String CollectionDate = request.getParameter("CollectionDate");
+		if (CollectionDate == null || CollectionDate == "") {
 			System.out.print("\n Couldn't get the CollectionDate \n");
 			response.sendRedirect("Form.jsp?success=no");
 		}
 
-		String formPrint = null;
-		if ((formPrint = request.getParameter("formPrint")) == null) {
+		String formPrint = request.getParameter("formPrint");
+		if (formPrint == null || formPrint =="") {
 			System.out.print("\n Couldn't get the formPrint flag \n");
 			response.sendRedirect("Form.jsp?success=no");
 		}
@@ -191,9 +191,8 @@ public class writeExcel extends HttpServlet {
 
 				int packageNumber = i + 1;
 
-				String[] attribute = null;
-				if ((attribute = request.getParameterValues("packageAttribute"
-						+ packageNumber)) == null) {
+				String[] attribute = request.getParameterValues("packageAttribute"+ packageNumber);
+				if (attribute == null || attribute.length == 0) {
 					System.out.print("\n Couldn't get package " + packageNumber
 							+ "attributes\n");
 					if (deleteFile(targetFile)) {	
@@ -218,9 +217,8 @@ public class writeExcel extends HttpServlet {
 				label = new Label(4, packageNumber, "");
 				wsheet.addCell(label);
 
-				String packageWeight = null;
-				if ((packageWeight = request.getParameter("packageWeight"
-						+ packageNumber)) == null) {
+				String packageWeight = request.getParameter("packageWeight"+ packageNumber);
+				if (packageWeight == null || packageWeight == "") {
 					System.out.print("\n Couldn't get the package "
 							+ packageNumber + "weight\n");
 					if (deleteFile(targetFile)) {	
@@ -236,9 +234,8 @@ public class writeExcel extends HttpServlet {
 				label = new Label(7, packageNumber, "");
 				wsheet.addCell(label);
 
-				String receiver = null;
-				if ((receiver = request
-						.getParameter("receiver" + packageNumber)) == null) {
+				String receiver = request.getParameter("receiver" + packageNumber);
+				if (receiver == null || receiver == "") {
 					System.out.print("\n Couldn't get receiver "
 							+ packageNumber + "\n");
 					if (deleteFile(targetFile)) {	
@@ -250,9 +247,8 @@ public class writeExcel extends HttpServlet {
 				label = new Label(8, packageNumber, receiver); // ReceiverName
 				wsheet.addCell(label);
 
-				String receiverPhone = null;
-				if ((receiverPhone = request.getParameter("receiverPhone"
-						+ packageNumber)) == null) {
+				String receiverPhone = request.getParameter("receiverPhone"+ packageNumber);
+				if (receiverPhone == null || receiverPhone == "") {
 					System.out.print("\n Couldn't get receiverPhone "
 							+ packageNumber + "\n");
 					if (deleteFile(targetFile)) {	
@@ -266,9 +262,8 @@ public class writeExcel extends HttpServlet {
 				label = new Label(10, packageNumber, "");
 				wsheet.addCell(label);
 
-				String receiverAddress = null;
-				if ((receiverAddress = request.getParameter("receiverAddress"
-						+ packageNumber)) == null) {
+				String receiverAddress = request.getParameter("receiverAddress"+ packageNumber);
+				if (receiverAddress == null || receiverAddress == "") {
 					System.out.print("\n Couldn't get receiver Address "
 							+ packageNumber + "\n");
 					if (deleteFile(targetFile)) {	
@@ -284,9 +279,8 @@ public class writeExcel extends HttpServlet {
 				label = new Label(13, packageNumber, "");
 				wsheet.addCell(label);
 
-				String receiverPostcode = null;
-				if ((receiverPostcode = request.getParameter("receiverPostcode"
-						+ packageNumber)) == null) {
+				String receiverPostcode = request.getParameter("receiverPostcode"+ packageNumber);
+				if (receiverPostcode == null || receiverPostcode =="") {
 					System.out.print("\n Couldn't get receiver Postcode "
 							+ packageNumber + "\n");
 					if (deleteFile(targetFile)) {	
@@ -298,9 +292,8 @@ public class writeExcel extends HttpServlet {
 				label = new Label(14, packageNumber, receiverPostcode); // receiverPostcode
 				wsheet.addCell(label);
 
-				String receiverCity = null;
-				if ((receiverCity = request.getParameter("receiverCity"
-						+ packageNumber)) == null) {
+				String receiverCity = request.getParameter("receiverCity"+ packageNumber);
+				if (receiverCity == null || receiverCity == "") {
 					System.out.print("\n Couldn't get receiver City "
 							+ packageNumber + "\n");
 					if (deleteFile(targetFile)) {	
@@ -336,9 +329,8 @@ public class writeExcel extends HttpServlet {
 				label = new Label(27, packageNumber, packageWeight); // packageWeight
 				wsheet.addCell(label);
 
-				String packageValue = null;
-				if ((packageValue = request.getParameter("packageValue"
-						+ packageNumber)) == null) {
+				String packageValue = request.getParameter("packageValue"+ packageNumber);
+				if (packageValue == null || packageValue =="") {
 					System.out.print("\n Couldn't get package Value "
 							+ packageNumber + "\n");
 					if (deleteFile(targetFile)) {	
@@ -354,15 +346,15 @@ public class writeExcel extends HttpServlet {
 				label = new Label(30, packageNumber, "nl");
 				wsheet.addCell(label);
 				
-				System.out.print("\n Pacakge "+packageNumber+" wholeAttribute is:" + wholeAttribute + "\n");
-				System.out.print("\n Pacakge "+packageNumber+" packageWeight is:" + packageWeight + "\n");
-				System.out.print("\n Pacakge "+packageNumber+" receiver is:" + receiver + "\n");
-				System.out.print("\n Pacakge "+packageNumber+" receiverPhone is:" + receiverPhone + "\n");
-				System.out.print("\n Pacakge "+packageNumber+" receiverAddress is:" + receiverAddress + "\n");
-				System.out.print("\n Pacakge "+packageNumber+" receiverPostcode is:" + receiverPostcode + "\n");
-				System.out.print("\n Pacakge "+packageNumber+" receiverCity is:" + receiverCity + "\n");
-				System.out.print("\n Pacakge "+packageNumber+" orderDateFormated is:" + orderDateFormated + "\n");
-				System.out.print("\n Pacakge "+packageNumber+" packageValue is:" + packageValue + "\n");
+				System.out.print("\n Pacakge "+packageNumber+" wholeAttribute is: " + wholeAttribute + "\n");
+				System.out.print("\n Pacakge "+packageNumber+" packageWeight is: " + packageWeight + "\n");
+				System.out.print("\n Pacakge "+packageNumber+" receiver is: " + receiver + "\n");
+				System.out.print("\n Pacakge "+packageNumber+" receiverPhone is: " + receiverPhone + "\n");
+				System.out.print("\n Pacakge "+packageNumber+" receiverAddress is: " + receiverAddress + "\n");
+				System.out.print("\n Pacakge "+packageNumber+" receiverPostcode is: " + receiverPostcode + "\n");
+				System.out.print("\n Pacakge "+packageNumber+" receiverCity is: " + receiverCity + "\n");
+				System.out.print("\n Pacakge "+packageNumber+" orderDateFormated is: " + orderDateFormated + "\n");
+				System.out.print("\n Pacakge "+packageNumber+" packageValue is: " + packageValue + "\n");
 			}
 
 			wwb.write();
