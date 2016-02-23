@@ -360,7 +360,7 @@ public class writeExcel extends HttpServlet {
 			String smtp_server = "smtp.sina.com";
 			String from_mail_address = userName;
 			String[] to_mail_address = { "thomas653008262@163.com",
-					"thomas65300826@163.com" };
+					"asiaeuroconnect@gmail.com" };
 			// String to_mail_address="thomas653008262@163.com";
 			// String BCC_to_mail_address="aectrading@sina.com";
 

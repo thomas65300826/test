@@ -777,7 +777,7 @@
 											<label class="jw-element-form-label" for="sender">寄件人
 												*</label>
 											<div class="jw-element-form-content ">
-												<input type="text" name="sender" id="sender" onkeyup="value=value.replace(/\//g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/\//g,''))"
+												<input type="text" name="sender" id="sender" required="true" onkeyup="value=value.replace(/\//g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/\//g,''))"
 													class="&#x20;jw-element-form-input-text" value="">
 											</div>
 										</div>
