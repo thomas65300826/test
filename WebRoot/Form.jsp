@@ -614,51 +614,6 @@
 		}
 	}
 
-	function displayMessage() {
-		if (navigator.userAgent.indexOf("Firefox") == -1) {
-			var obj = document.getElementsByTagName('SELECT');
-			for ( var i = 0; i < obj.length; i++) {
-				if (obj[i].type.indexOf("select") != -1)
-					obj[i].style.visibility = 'hidden';
-			}
-			mask.style.visibility = 'visible';
-			massage_box.style.visibility = 'visible';
-		}
-	}
-	function hiddenMessage() {
-		mask.style.visibility = 'hidden';
-		massage_box.style.visibility = 'hidden';
-	}
-	var Obj = '';
-	document.onmouseup = MUp;
-	document.onmousemove = MMove;
-	function MDown(Object) {
-		Obj = Object.id;
-		document.all(Obj).setCapture();
-		pX = event.x - document.all(Obj).style.pixelLeft;
-		pY = event.y - document.all(Obj).style.pixelTop;
-	}
-
-	function MMove() {
-		if (Obj != '') {
-			document.all(Obj).style.left = event.x - pX;
-			document.all(Obj).style.top = event.y - pY;
-		}
-	}
-
-	function MUp() {
-		if (Obj != '') {
-			document.all(Obj).releaseCapture();
-			Obj = '';
-		}
-	}
-
-	function displayWait() {
-		displayMessage();
-	}
-	function WaitDia() {
-		document.getElementById("myDialog").showModal();
-	}
 
 	function cover() {
 		//mask.style.visibility = 'visible';
@@ -895,34 +850,6 @@
 												class="&#x20;jw-element-form-offset&#x20;jw-btn&#x20;jw-btn-sm&#x20;jw-btn-roundness-default&#x20;jw-btn-style-default&#x20;jw-btn__default-color"
 												value="">提交</button>
 										</div>
-
-										<!--  
-										<div id="massage_box" onclick="hiddenMessage();"
-											style="font-family:SimSun;">
-											<div class="massage">
-												<div class="header" onmousedown="MDown(massage_box);">
-													<div
-														style="display: inline; width: 150px; position: absolute">
-														正在提交中 ... ...</div>
-													<span
-														onClick="massage_box.style.visibility='hidden'; mask.style.visibility='hidden'"
-														style="float: right; display: inline; cursor: hand"><img
-														src="images/guanbi.png" height="30px" width="30px" /> </span>
-												</div>
-												<div
-													style="margin-top: 20px; margin-left: 20px; width: 128px; height: 128px; float: left;">
-													<img src="images/cxz_ly.gif" />
-												</div>
-												<div
-													style="margin-top: 50px; width: 136px; height: 128px; float: right;">
-													提交请求已发送 <br /> 等待返回提交结果
-												</div>
-											</div>
-										</div>
-										<div id="mask" onclick="hiddenMessage();"></div>
-
-										  -->
-
 									</form>
 								</div>
 							</div>
