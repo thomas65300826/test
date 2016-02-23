@@ -69,6 +69,7 @@ public class writeExcel extends HttpServlet {
 			System.out.print("\n Couldn't get the sender name \n");
 			response.sendRedirect("Form.jsp?success=no");
 		}
+		
 
 		String senderAddress = null;
 		if ((senderAddress = request.getParameter("senderAddress")) == null) {
@@ -104,7 +105,10 @@ public class writeExcel extends HttpServlet {
 		String targetFile = path + "/" + filename;
 		System.out.print("\n Filename is:" + filename + "\n");
 		System.out.print("\n Sender name is:" + senderName + "\n");
-
+		System.out.print("\n senderAddress is: "+ senderAddress + "\n");
+		System.out.print("\n senderPhoneNumber is: "+ senderPhoneNumber + "\n");
+		System.out.print("\n CollectionDate is: "+ CollectionDate + "\n");
+		System.out.print("\n formPrint flag is: "+ formPrint + "\n");
 		try {
 			FileOutputStream customerForm = new FileOutputStream(targetFile);
 			WritableWorkbook wwb = Workbook.createWorkbook(customerForm);
