@@ -60,6 +60,7 @@ public class writeExcel extends HttpServlet {
 		if (sPackageAmount == null || sPackageAmount == "") {
 			System.out.print("\n Couldn't get the package number \n");
 			response.sendRedirect("Form.jsp?success=no");
+			return;
 		} else {
 			iPackageAmount = Integer.parseInt(sPackageAmount);
 		}
@@ -68,6 +69,7 @@ public class writeExcel extends HttpServlet {
 		if (senderName == null || senderName == "") {
 			System.out.print("\n Couldn't get the sender name \n");
 			response.sendRedirect("Form.jsp?success=no");
+			return;
 		}
 		
 
@@ -75,30 +77,35 @@ public class writeExcel extends HttpServlet {
 		if (senderAddress == null || senderAddress == "") {
 			System.out.print("\n Couldn't get the senderAddress \n");
 			response.sendRedirect("Form.jsp?success=no");
+			return;
 		}
 
 		String senderPhoneNumber = request.getParameter("senderPhoneNumber");
 		if (senderPhoneNumber == null || senderPhoneNumber == "") {
 			System.out.print("\n Couldn't get the sender Phone Number \n");
 			response.sendRedirect("Form.jsp?success=no");
+			return;
 		}
 
 		String senderEmail = request.getParameter("senderEmail");
 		if (senderEmail == null || senderEmail == "") {
 			System.out.print("\n Couldn't get the sender Email \n");
 			response.sendRedirect("Form.jsp?success=no");
+			return;
 		}
 
 		String CollectionDate = request.getParameter("CollectionDate");
 		if (CollectionDate == null || CollectionDate == "") {
 			System.out.print("\n Couldn't get the CollectionDate \n");
 			response.sendRedirect("Form.jsp?success=no");
+			return;
 		}
 
 		String formPrint = request.getParameter("formPrint");
 		if (formPrint == null || formPrint =="") {
 			System.out.print("\n Couldn't get the formPrint flag \n");
 			response.sendRedirect("Form.jsp?success=no");
+			return;
 		}
 
 		String filename = "Order from " + senderName + "--" + random + ".xls";
@@ -200,6 +207,7 @@ public class writeExcel extends HttpServlet {
 							+ "attributes\n");
 					}
 					response.sendRedirect("Form.jsp?success=no");
+					return;
 				}
 				String wholeAttribute = "";
 				for (int a = 0; a < attribute.length; a++) {
@@ -226,6 +234,7 @@ public class writeExcel extends HttpServlet {
 							+ packageNumber + "weight\n");
 					}
 					response.sendRedirect("Form.jsp?success=no");
+					return;
 				}
 				label = new Label(5, packageNumber, packageWeight); // packageWeight
 				wsheet.addCell(label);
@@ -243,6 +252,7 @@ public class writeExcel extends HttpServlet {
 							+ packageNumber + "\n");
 					}
 					response.sendRedirect("Form.jsp?success=no");
+					return;
 				}
 				label = new Label(8, packageNumber, receiver); // ReceiverName
 				wsheet.addCell(label);
@@ -256,6 +266,7 @@ public class writeExcel extends HttpServlet {
 							+ packageNumber + "\n");
 					}
 					response.sendRedirect("Form.jsp?success=no");
+					return;
 				}
 				label = new Label(9, packageNumber, receiverPhone); // ReceiverPhone
 				wsheet.addCell(label);
@@ -271,6 +282,7 @@ public class writeExcel extends HttpServlet {
 							+ packageNumber + "\n");
 					}
 					response.sendRedirect("Form.jsp?success=no");
+					return;
 				}
 				label = new Label(11, packageNumber, receiverAddress); // receiveAddress
 				wsheet.addCell(label);
@@ -288,6 +300,7 @@ public class writeExcel extends HttpServlet {
 							+ packageNumber + "\n");
 					}
 					response.sendRedirect("Form.jsp?success=no");
+					return;
 				}
 				label = new Label(14, packageNumber, receiverPostcode); // receiverPostcode
 				wsheet.addCell(label);
@@ -301,6 +314,7 @@ public class writeExcel extends HttpServlet {
 							+ packageNumber + "\n");
 					}
 					response.sendRedirect("Form.jsp?success=no");
+					return;
 				}
 				label = new Label(15, packageNumber, receiverCity); // receiverCity
 				wsheet.addCell(label);
@@ -338,6 +352,7 @@ public class writeExcel extends HttpServlet {
 							+ packageNumber + "\n");
 					}
 					response.sendRedirect("Form.jsp?success=no");
+					return;
 				}
 				label = new Label(28, packageNumber, packageValue); // packageValue
 				wsheet.addCell(label);
@@ -430,7 +445,6 @@ public class writeExcel extends HttpServlet {
 				System.out.print("\n target file do exist!!\n");
 			}
 			response.sendRedirect("Form.jsp?success=yes");
-
 		} catch (Exception ex) {
 			System.err.println("邮件发送失败的原因是：" + ex.getMessage());
 			System.err.println("具体的错误原因");
