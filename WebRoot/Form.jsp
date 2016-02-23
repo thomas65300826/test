@@ -12,14 +12,14 @@
 <style type="text/css">
 #massage_box {
 	position: absolute;
-	left: expression((       body.clientWidth-350)/2 );
-	top: expression(body.scrollTop +(       body.clientHeight-this.offsetHeight)/2
-		);
+	left: expression((         body.clientWidth-350)/2 );
+	top: expression(body.scrollTop +(         body.clientHeight-this.offsetHeight
+		)/2 );
 	width: 350px;
 	height: 130px;
-	filter: dropshadow(color =       #666666, offx =       3, offy =         3,
-		positive = 
-		     2);
+	filter: dropshadow(color =         #666666, offx =         3, offy =           3
+		, positive =  
+		      2);
 	z-index: 2;
 	visibility: hidden
 }
@@ -29,10 +29,10 @@
 	top: 0;
 	left: 0;
 	width: expression(body.clientWidth);
-	height: expression(body.scrollHeight >          body.clientHeight ?     
-		   body.scrollHeight :       body.clientHeight);
+	height: expression(body.scrollHeight >            body.clientHeight ?      
+		    body.scrollHeight :         body.clientHeight);
 	background: #666;
-	filter: ALPHA(opacity =         60);
+	filter: ALPHA(opacity =           60);
 	z-index: 1;
 	visibility: hidden
 }
@@ -57,8 +57,6 @@
 	color: #fff
 }
 
-
-
 #cover_div {
 	left: 0px;
 	top: 0px;
@@ -69,7 +67,7 @@
 	height: 100%;
 	background: #000;
 	opacity: 0.7;
-	filter: alpha(opacity =   30);
+	filter: alpha(opacity =     30);
 }
 
 #cover_context_div {
@@ -566,7 +564,8 @@
 
 <script> 
 //取出传回来的参数error并与yes比较
-	var success ='<%=request.getParameter("success")%>';
+	var success ='<%=request.getParameter("success")%>
+	';
 	if (success == 'yes') {
 		alert("提交成功!");
 	} else if (success == 'no') {
@@ -582,7 +581,12 @@
 			var weight = document.getElementById("packageWeight" + p).value;//document.getElementsByName("packageWeight" + p).value;
 			var value = document.getElementById("packageValue" + p).value;
 			var postcode = document.getElementById("receiverPostcode" + p).value;
+			var collectionDate = document.getElementById("CollectionDate").value;
 			var pattern = /\d{6}/;
+			if (collectionDate == "") {
+				alert("请选择提货日期！");
+				return false;
+			}
 			if (!pattern.test(postcode)) {
 				alert("包裹" + p + "邮编请填6位数字！");
 				return false;
@@ -613,7 +617,6 @@
 			}
 		}
 	}
-
 
 	function cover() {
 		//mask.style.visibility = 'visible';
@@ -673,33 +676,25 @@
 				<nav class="menu clear jw-menu-collapse">
 				<ul id="jw-menu" class="jw-menu jw-menu-horizontal">
 					<li class="jw-menu-item"><a id="jouwweb-page-2329933"
-						class="jw-menu-link" href="http://www.aectrading.nl/">Home</a>
-					</li>
+						class="jw-menu-link" href="http://www.aectrading.nl/">Home</a></li>
 					<li class="jw-menu-item"><a id="jouwweb-page-2330478"
-						class="jw-menu-link" href="http://www.aectrading.nl/-6">使用需知</a>
-					</li>
+						class="jw-menu-link" href="http://www.aectrading.nl/-6">使用需知</a></li>
 					<li class="jw-menu-item jw-menu-is-active"><a
 						id="jouwweb-page-2330094" class="jw-menu-link"
 						href="http://asiaeuroconnect.aectrading.ali-sh.goodrain.net:10080">在线下单</a>
 					</li>
 					<li class="jw-menu-item"><a id="jouwweb-page-2348588"
-						class="jw-menu-link" href="http://www.aectrading.nl/-8">提货路线</a>
-					</li>
+						class="jw-menu-link" href="http://www.aectrading.nl/-8">提货路线</a></li>
 					<li class="jw-menu-item"><a id="jouwweb-page-2330034"
-						class="jw-menu-link" href="http://www.aectrading.nl/-7">在线查询</a>
-					</li>
+						class="jw-menu-link" href="http://www.aectrading.nl/-7">在线查询</a></li>
 					<li class="jw-menu-item"><a id="jouwweb-page-2330459"
-						class="jw-menu-link" href="http://www.aectrading.nl/-3">资料下载</a>
-					</li>
+						class="jw-menu-link" href="http://www.aectrading.nl/-3">资料下载</a></li>
 					<li class="jw-menu-item"><a id="jouwweb-page-2330473"
-						class="jw-menu-link" href="http://www.aectrading.nl/-5">最新消息</a>
-					</li>
+						class="jw-menu-link" href="http://www.aectrading.nl/-5">最新消息</a></li>
 					<li class="jw-menu-item"><a id="jouwweb-page-2330472"
-						class="jw-menu-link" href="http://www.aectrading.nl/-4">意见反馈</a>
-					</li>
+						class="jw-menu-link" href="http://www.aectrading.nl/-4">意见反馈</a></li>
 					<li class="jw-menu-item"><a id="jouwweb-page-2332811"
-						class="jw-menu-link" href="http://www.aectrading.nl/-2">常见问题</a>
-					</li>
+						class="jw-menu-link" href="http://www.aectrading.nl/-2">常见问题</a></li>
 				</ul>
 				</nav>
 
@@ -732,12 +727,15 @@
 											<label class="jw-element-form-label" for="sender">寄件人
 												*</label>
 											<div class="jw-element-form-content ">
-												<input type="text" name="sender" id="sender" required="true" onkeyup="value=value.replace(/\//g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/\//g,''))"
+												<input type="text" name="sender" id="sender" required="true"
+													onkeyup="value=value.replace(/\//g,'') "
+													onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/\//g,''))"
 													class="&#x20;jw-element-form-input-text" value="">
 											</div>
 										</div>
 										<div class="jw-element-form-group">
-											<label class="jw-element-form-label" for="senderAddress">提货地址(填街名门牌号，城市名和邮编 [自送填写"自送"])*</label>
+											<label class="jw-element-form-label" for="senderAddress">提货地址(填街名门牌号，城市名和邮编
+												[自送填写"自送"])*</label>
 											<div class="jw-element-form-content ">
 												<input type="text" name="senderAddress" id="senderAddress"
 													required="true" class="&#x20;jw-element-form-input-text"
@@ -802,8 +800,8 @@
 																id="reduceBtn" onclick="reducePackage()">
 																<span class="glyphicon glyphicon-minus"></span>
 															</button> </span> <input type="text" class="form-control" value='1'
-															name="packageAmount" id="packageAmount" readonly> <span
-															class="input-group-btn">
+															name="packageAmount" id="packageAmount" readonly>
+														<span class="input-group-btn">
 															<button style="color:#FFFFFF;background-color:#1C86EE;"
 																type="button" class="btn btn-default btn-md" id="addBtn"
 																onclick="addPackage()">
@@ -917,7 +915,7 @@
 
 		<div id="cover_context_div" class="cover_context_div">
 			<div>
-				<font size = "3" color="white">正在提交中……</font>
+				<font size="3" color="white">正在提交中……</font>
 			</div>
 			<div
 				style="margin-top: 20px; margin-left: 3px; width: 128px; height: 128px; float: left;">
