@@ -353,6 +353,16 @@ public class writeExcel extends HttpServlet {
 				wsheet.addCell(label);
 				label = new Label(30, packageNumber, "nl");
 				wsheet.addCell(label);
+				
+				System.out.print("\n Pacakge "+packageNumber+" wholeAttribute is:" + wholeAttribute + "\n");
+				System.out.print("\n Pacakge "+packageNumber+" packageWeight is:" + packageWeight + "\n");
+				System.out.print("\n Pacakge "+packageNumber+" receiver is:" + receiver + "\n");
+				System.out.print("\n Pacakge "+packageNumber+" receiverPhone is:" + receiverPhone + "\n");
+				System.out.print("\n Pacakge "+packageNumber+" receiverAddress is:" + receiverAddress + "\n");
+				System.out.print("\n Pacakge "+packageNumber+" receiverPostcode is:" + receiverPostcode + "\n");
+				System.out.print("\n Pacakge "+packageNumber+" receiverCity is:" + receiverCity + "\n");
+				System.out.print("\n Pacakge "+packageNumber+" orderDateFormated is:" + orderDateFormated + "\n");
+				System.out.print("\n Pacakge "+packageNumber+" packageValue is:" + packageValue + "\n");
 			}
 
 			wwb.write();
