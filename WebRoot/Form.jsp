@@ -737,8 +737,7 @@
 											</div>
 										</div>
 										<div class="jw-element-form-group">
-											<label class="jw-element-form-label" for="senderAddress">提货地址
-												（填街名门牌号，城市名和邮编 [自送填写"自送"])*</label>
+											<label class="jw-element-form-label" for="senderAddress">提货地址(填街名门牌号，城市名和邮编 [自送填写"自送"])*</label>
 											<div class="jw-element-form-content ">
 												<input type="text" name="senderAddress" id="senderAddress"
 													required="true" class="&#x20;jw-element-form-input-text"
